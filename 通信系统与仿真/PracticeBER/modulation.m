@@ -24,10 +24,10 @@ function mod_out=modulation(mod_in,mod_mode)
 
 %% Function discription:
 %%-------------------------------------------------------------------------
-%%¸ù¾İÊäÈëµÄµ÷ÖÆ·½Ê½£¬¶ÔÊäÈëĞòÁĞMOD_IN½øĞĞµ÷ÖÆ£¬·Ö±ğ²ÉÓÃBPSK, QPSK, !6QAM, 64QAM£¬
-%%Íê³É¶ÔĞÇ×ùÍ¼µÄÓ³Éä£¬Êä³öÎªY.×ª»¯µÄ·½·¨Îª£ºÏÈĞ´³öÊ®½øÖÆÇé¿öÏÂ´Ó0 µ½N-1
-%%£¨NÎªĞÇ×ùÍ¼µÄµãÊı£©Ëù¶ÔÓ¦µÄĞÇ×ù×ø±ê£»ÔÙ½«ÊäÈëµÄ¶ş½øÖÆĞòÁĞ×ª»¯ÎªÏàÓ¦µÄ
-%%Ê®½øÖÆ£¬ÒÔ²é±íµÄ·½·¨²é³ö¶ÔÓ¦µãµÄ¸´Êı×ø±ê£¬¼´Îªµ÷ÖÆÓ³ÉäºóµÄ½á¹û¡£
+%%æ ¹æ®è¾“å…¥çš„è°ƒåˆ¶æ–¹å¼ï¼Œå¯¹è¾“å…¥åºåˆ—MOD_INè¿›è¡Œè°ƒåˆ¶ï¼Œåˆ†åˆ«é‡‡ç”¨BPSK, QPSK, !6QAM, 64QAMï¼Œ
+%%å®Œæˆå¯¹æ˜Ÿåº§å›¾çš„æ˜ å°„ï¼Œè¾“å‡ºä¸ºY.è½¬åŒ–çš„æ–¹æ³•ä¸ºï¼šå…ˆå†™å‡ºåè¿›åˆ¶æƒ…å†µä¸‹ä»0 åˆ°N-1
+%%ï¼ˆNä¸ºæ˜Ÿåº§å›¾çš„ç‚¹æ•°ï¼‰æ‰€å¯¹åº”çš„æ˜Ÿåº§åæ ‡ï¼›å†å°†è¾“å…¥çš„äºŒè¿›åˆ¶åºåˆ—è½¬åŒ–ä¸ºç›¸åº”çš„
+%%åè¿›åˆ¶ï¼Œä»¥æŸ¥è¡¨çš„æ–¹æ³•æŸ¥å‡ºå¯¹åº”ç‚¹çš„å¤æ•°åæ ‡ï¼Œå³ä¸ºè°ƒåˆ¶æ˜ å°„åçš„ç»“æœã€‚
 
 %%The OFDM subcarriers shall be modulated by using BPSK, QPSK, 16-QAM, or 64-QAM modulation,
 %%depending on the RATE requested. The encoded and interleaved binary serial input data shall
@@ -35,7 +35,7 @@ function mod_out=modulation(mod_in,mod_mode)
 %%representing BPSK, QPSK, 16-QAM, or 64-QAM constellation points. The conversion shall be
 %%performed according to Gray-coded constellation mappings, with the input bit MOD_IN. The
 %%output values,MOD_OUT are formed by multiplying the resulting (I+jQ) value by a normalization 
-%%factor K MOD , as described in equation d = (I + jQ) ¡Á K MOD ) The normalization factor,K MOD,
+%%factor K MOD , as described in equation d = (I + jQ) Ã— K MOD ) The normalization factor,K MOD,
 %%depends on the base modulation mode. Note that the modulation type can be different from the
 %%start to the end of the transmission, as the signal changes from SIGNAL to DATA. The purpose
 %%of the normalization factor is to achieve the same  average power for all mappings.In practical
@@ -46,44 +46,44 @@ function mod_out=modulation(mod_in,mod_mode)
 
 %% Input: 
 %%-------------------------------------------------------------------------
-%%  mod_in:ÊäÈëµÄ¶ş½øÖÆĞòÁĞ(The sequence to be modulated)
+%%  mod_in:è¾“å…¥çš„äºŒè¿›åˆ¶åºåˆ—(The sequence to be modulated)
 %%-------------------------------------------------------------------------
 %% Output:
 %%-------------------------------------------------------------------------
-%% mod_out:ĞÇ×ùÍ¼Ó³ÉäºóµÃµ½µÄµ÷ÖÆ¸´Êı½á¹û(The output after modulation)
+%% mod_out:æ˜Ÿåº§å›¾æ˜ å°„åå¾—åˆ°çš„è°ƒåˆ¶å¤æ•°ç»“æœ(The output after modulation)
 %%-------------------------------------------------------------------------
 %% Global Variable:
 %%  g_RT (the vector which contains the modulation mode)
 %%-------------------------------------------------------------------------
-%% Z :Ñ¡Ôñµ÷ÖÆ·½Ê½µÄ²ÎÊı (the parameter to choose the modulation mode)
+%% Z :é€‰æ‹©è°ƒåˆ¶æ–¹å¼çš„å‚æ•° (the parameter to choose the modulation mode)
 %%
-%% R :ÊäÈë¶ş½øÖÆĞòÁĞÖØĞÂÅÅÁĞ£¨°´Ò»¶¨ÒªÇó£©ºóµÄ½á¹û,ÀıÈç£º¶Ô16QAM£¬Òª°ÑÊäÈëĞòÁĞµ÷ÕûÎª
-%% 4ĞĞ£¬length(g_MOD_IN_16QAM )/4  ÁĞµÄ¾ØÕó¡£(Reshape the input binary sequence to be
+%% R :è¾“å…¥äºŒè¿›åˆ¶åºåˆ—é‡æ–°æ’åˆ—ï¼ˆæŒ‰ä¸€å®šè¦æ±‚ï¼‰åçš„ç»“æœ,ä¾‹å¦‚ï¼šå¯¹16QAMï¼Œè¦æŠŠè¾“å…¥åºåˆ—è°ƒæ•´ä¸º
+%% 4è¡Œï¼Œlength(g_MOD_IN_16QAM )/4  åˆ—çš„çŸ©é˜µã€‚(Reshape the input binary sequence to be
 %% matrix of n-row,m-column .For example,16QAM,will be reshaped into 4-row,
 %%length(g_MOD_IN_16QAM))/4 column )
 %%
-%% B2D :¶ş½øÖÆÏòÊ®½øÖÆ×ª»¯ºóµÄ½á¹û (convert the binary sequence to  dec )
+%% B2D :äºŒè¿›åˆ¶å‘åè¿›åˆ¶è½¬åŒ–åçš„ç»“æœ (convert the binary sequence to  dec )
 %%
-%% Temp:ĞÇ×ùÍ¼ÕóÁĞ (the  constellation)
+%% Temp:æ˜Ÿåº§å›¾é˜µåˆ— (the  constellation)
 %%-------------------------------------------------------------------------
 %%********************************************************
 %system_parameters  
 switch (mod_mode)
 case 2 
     Temp=[-1 1];
-    mod_out = Temp(mod_in+1);%Ó³Éä,×¢Òâ¼Ó1£¬ÒòÎªmatlabÃ»ÓĞa(0)Ïî£¬¶øÊÇ´Óa(1)¿ªÊ¼ 
+    mod_out = Temp(mod_in+1);%æ˜ å°„,æ³¨æ„åŠ 1ï¼Œå› ä¸ºmatlabæ²¡æœ‰a(0)é¡¹ï¼Œè€Œæ˜¯ä»a(1)å¼€å§‹ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 case 4
     Temp=[-1-j  -1+j  1-j   1+j];
-    mod_in = reshape(mod_in,2,length(mod_in)/2);%½«ÊäÈëĞòÁĞ×ª»¯Îª(2,length(x)/2)µÄ¾ØÕó
-    mod_out = Temp([2 1]*mod_in+1)/sqrt(2);%Ó³Éä,×¢Òâ¼Ó1£¬ÒòÎªmatlabÃ»ÓĞa(0)Ïî£¬¶øÊÇ´Óa(1)¿ªÊ¼
+    mod_in = reshape(mod_in,2,length(mod_in)/2);%å°†è¾“å…¥åºåˆ—è½¬åŒ–ä¸º(2,length(x)/2)çš„çŸ©é˜µ
+    mod_out = Temp([2 1]*mod_in+1)/sqrt(2);%æ˜ å°„,æ³¨æ„åŠ 1ï¼Œå› ä¸ºmatlabæ²¡æœ‰a(0)é¡¹ï¼Œè€Œæ˜¯ä»a(1)å¼€å§‹
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 case 8
     Temp=[1  (1+j)/sqrt(2)  (-1+j)/sqrt(2)   +j (1-j)/sqrt(2) -j -1 (-1-j)/sqrt(2)];
-    mod_in = reshape(mod_in,3,length(mod_in)/3);%½«ÊäÈëĞòÁĞ×ª»¯Îª(3,length(x)/3)µÄ¾ØÕó
-    mod_out = Temp([4 2 1]*mod_in+1);%Ó³Éä,×¢Òâ¼Ó1£¬ÒòÎªmatlabÃ»ÓĞa(0)Ïî£¬¶øÊÇ´Óa(1)¿ªÊ¼
+    mod_in = reshape(mod_in,3,length(mod_in)/3);%å°†è¾“å…¥åºåˆ—è½¬åŒ–ä¸º(3,length(x)/3)çš„çŸ©é˜µ
+    mod_out = Temp([4 2 1]*mod_in+1);%æ˜ å°„,æ³¨æ„åŠ 1ï¼Œå› ä¸ºmatlabæ²¡æœ‰a(0)é¡¹ï¼Œè€Œæ˜¯ä»a(1)å¼€å§‹
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 case 16
@@ -91,8 +91,8 @@ case 16
           -1-3*j   -1-j   -1+3*j   -1+j ...
            3-3*j    3-j    3+3*j    3+j ...
            1-3*j    1-j    1+3*j    1+j]/sqrt(10);
-   mod_in = reshape(mod_in,4,length(mod_in)/4);%½«ÊäÈëĞòÁĞ×ª»¯Îª(4,length(x)/4)µÄ¾ØÕó
-   mod_out = Temp([8 4 2 1]*mod_in+1);%Ó³Éä,×¢Òâ¼Ó1£¬ÒòÎªmatlabÃ»ÓĞa(0)Ïî£¬¶øÊÇ´Óa(1)¿ªÊ¼
+   mod_in = reshape(mod_in,4,length(mod_in)/4);%å°†è¾“å…¥åºåˆ—è½¬åŒ–ä¸º(4,length(x)/4)çš„çŸ©é˜µ
+   mod_out = Temp([8 4 2 1]*mod_in+1);%æ˜ å°„,æ³¨æ„åŠ 1ï¼Œå› ä¸ºmatlabæ²¡æœ‰a(0)é¡¹ï¼Œè€Œæ˜¯ä»a(1)å¼€å§‹
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 case 64
@@ -104,8 +104,8 @@ case 64
           5-7*j   5-5*j   5-j   5-3*j   5+7*j   5+5*j   5+j   5+3*j...
           1-7*j   1-5*j   1-j   1-3*j   1+7*j   1+5*j   1+j   1+3*j...
           3-7*j   3-5*j   3-j   3-3*j   3+7*j   3+5*j   3+j   3+3*j ]/sqrt(42);
-   mod_in = reshape(mod_in,6,length(mod_in)/6);%½«ÊäÈëĞòÁĞ×ª»¯Îª(6,length(x)/6)µÄ¾ØÕó
-   mod_out = Temp([32 16 8 4 2 1]*mod_in+1);%Ó³Éä,×¢Òâ¼Ó1£¬ÒòÎªmatlabÃ»ÓĞa(0)Ïî£¬¶øÊÇ´Óa(1)¿ªÊ¼
+   mod_in = reshape(mod_in,6,length(mod_in)/6);%å°†è¾“å…¥åºåˆ—è½¬åŒ–ä¸º(6,length(x)/6)çš„çŸ©é˜µ
+   mod_out = Temp([32 16 8 4 2 1]*mod_in+1);%æ˜ å°„,æ³¨æ„åŠ 1ï¼Œå› ä¸ºmatlabæ²¡æœ‰a(0)é¡¹ï¼Œè€Œæ˜¯ä»a(1)å¼€å§‹
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 otherwise

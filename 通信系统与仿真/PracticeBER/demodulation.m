@@ -1,7 +1,7 @@
 function  demod_out = demodulation(demod_in,mod_mode)
 %%*************************************************************************
 %%Function information:
-%%ÓÉĞÅµÀĞÅºÅµÄ¸´ÊıÖµ½âµ÷¶ÔÓ¦µÄ¶ş½øÖÆĞòÁĞ(In this program,the channel value are demodulated.)
+%%ç”±ä¿¡é“ä¿¡å·çš„å¤æ•°å€¼è§£è°ƒå¯¹åº”çš„äºŒè¿›åˆ¶åºåˆ—(In this program,the channel value are demodulated.)
 %%-------------------------------------------------------------------------
 %%First time   : 3/25/2002                                           
 %%Newest modified time:6/20/2002                                         
@@ -26,9 +26,9 @@ function  demod_out = demodulation(demod_in,mod_mode)
 
 %% Function discription:
 %%-------------------------------------------------------------------------
-%% ÓÉĞÅµÀĞÅºÅµÄ¸´ÊıÖµÕÒ³ö¶ÔÓ¦µÄ¶ş½øÖÆĞòÁĞ¡£·½·¨ÈçÏÂ£ºÓÉĞÅµÀÖµ£¬
-%%Çó³ö¸ÃÖµÓëĞÇ×ùÍ¼ÖĞËùÓĞµãµÄ¾àÀë£¬ÕÒ³ö¾àÀë×îĞ¡µÄµã£¬¸Ãµã¶ÔÓ¦µÄ
-%%¶ş½øÖÆĞòÁĞ¼°Îª¸ÃĞÅµÀ¶ÔÓ¦µÄ½âµ÷½á¹û¡£
+%% ç”±ä¿¡é“ä¿¡å·çš„å¤æ•°å€¼æ‰¾å‡ºå¯¹åº”çš„äºŒè¿›åˆ¶åºåˆ—ã€‚æ–¹æ³•å¦‚ä¸‹ï¼šç”±ä¿¡é“å€¼ï¼Œ
+%%æ±‚å‡ºè¯¥å€¼ä¸æ˜Ÿåº§å›¾ä¸­æ‰€æœ‰ç‚¹çš„è·ç¦»ï¼Œæ‰¾å‡ºè·ç¦»æœ€å°çš„ç‚¹ï¼Œè¯¥ç‚¹å¯¹åº”çš„
+%%äºŒè¿›åˆ¶åºåˆ—åŠä¸ºè¯¥ä¿¡é“å¯¹åº”çš„è§£è°ƒç»“æœã€‚
 %% In this program,the channel value are demodulated.
 %% The process: firstly,calculate  the distance between the channel value
 %% and all the constellation points.then,find the shortest distance,thus ,the point
@@ -37,11 +37,11 @@ function  demod_out = demodulation(demod_in,mod_mode)
 
 %% Input: 
 %%-------------------------------------------------------------------------
-%% demod_in :ÊäÈëĞÅµÀÖµ  (the input channel value)
+%% demod_in :è¾“å…¥ä¿¡é“å€¼  (the input channel value)
 %%-------------------------------------------------------------------------
 %% Output:
 %%-------------------------------------------------------------------------
-%% demod_out:½âµ÷½á¹û (demodulation output(binary) )
+%% demod_out:è§£è°ƒç»“æœ (demodulation output(binary) )
 %%-------------------------------------------------------------------------
 %% Global Variable:
 %%-------------------------------------------------------------------------
@@ -57,7 +57,7 @@ case 2
     s2=[-1;1]/sqrt(2);
     c2 = [0 1];
     L = length(demod_in);
-    [tmp, index] = min(abs(s2(:,ones(1,L))-demod_in(ones(2,1),:)));% ×îĞ¡Öµ¶ÔÓ¦µÄĞÇ×ùµãĞòºÅµÄ¶ş½øÖÆ±íÊ¾¼´Îª½âµ÷½á¹û
+    [tmp, index] = min(abs(s2(:,ones(1,L))-demod_in(ones(2,1),:)));% æœ€å°å€¼å¯¹åº”çš„æ˜Ÿåº§ç‚¹åºå·çš„äºŒè¿›åˆ¶è¡¨ç¤ºå³ä¸ºè§£è°ƒç»“æœ
     demod_out = c2(index);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 case 4
@@ -65,7 +65,7 @@ case 4
     s4=[-1-j; -1+j; 1-j; 1+j]/sqrt(2);
     c4 = [0 0; 0 1; 1 0; 1 1];
     L = length(demod_in);
-    [tmp, index] = min(abs(s4(:,ones(1,L))-demod_in(ones(4,1),:)));% ×îĞ¡Öµ¶ÔÓ¦µÄĞÇ×ùµãĞòºÅµÄ¶ş½øÖÆ±íÊ¾¼´Îª½âµ÷½á¹û
+    [tmp, index] = min(abs(s4(:,ones(1,L))-demod_in(ones(4,1),:)));% æœ€å°å€¼å¯¹åº”çš„æ˜Ÿåº§ç‚¹åºå·çš„äºŒè¿›åˆ¶è¡¨ç¤ºå³ä¸ºè§£è°ƒç»“æœ
     demod_out = c4(index,:);
     demod_out = reshape(transpose(demod_out),1,2*L);
     %soft
@@ -80,7 +80,7 @@ case 8
     s8=[1; (1+j)/sqrt(2); (-1+j)/sqrt(2); +j; (1-j)/sqrt(2); -j; -1; (-1-j)/sqrt(2)];
     c8 = de2bi([0:7],'left-msb');
     L = length(demod_in);
-    [tmp, index] = min(abs(s8(:,ones(1,L))-demod_in(ones(8,1),:)));% ×îĞ¡Öµ¶ÔÓ¦µÄĞÇ×ùµãĞòºÅµÄ¶ş½øÖÆ±íÊ¾¼´Îª½âµ÷½á¹û
+    [tmp, index] = min(abs(s8(:,ones(1,L))-demod_in(ones(8,1),:)));% æœ€å°å€¼å¯¹åº”çš„æ˜Ÿåº§ç‚¹åºå·çš„äºŒè¿›åˆ¶è¡¨ç¤ºå³ä¸ºè§£è°ƒç»“æœ
     demod_out = c8(index,:);
     demod_out = reshape(transpose(demod_out),1,3*L);
 
@@ -94,7 +94,7 @@ case 16
         1-3*j;    1-j;    1+3*j;    1+j]/sqrt(10);
     c16 = de2bi([0:15],'left-msb');
     L = length(demod_in);
-    [tmp, index] = min(abs(s16(:,ones(1,L))-demod_in(ones(16,1),:)));% ×îĞ¡Öµ¶ÔÓ¦µÄĞÇ×ùµãĞòºÅµÄ¶ş½øÖÆ±íÊ¾¼´Îª½âµ÷½á¹û
+    [tmp, index] = min(abs(s16(:,ones(1,L))-demod_in(ones(16,1),:)));% æœ€å°å€¼å¯¹åº”çš„æ˜Ÿåº§ç‚¹åºå·çš„äºŒè¿›åˆ¶è¡¨ç¤ºå³ä¸ºè§£è°ƒç»“æœ
     demod_out = c16(index,:);
     demod_out = reshape(transpose(demod_out),1,4*L);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,7 +110,7 @@ case 64
        3-7*j;  3-5*j;  3-j;  3-3*j;  3+7*j;  3+5*j;  3+j;  3+3*j ]/sqrt(42);
     c64 = de2bi([0:63],'left-msb');
     L = length(demod_in);
-    [tmp, index] = min(abs(s64(:,ones(1,L))-demod_in(ones(64,1),:)));% ×îĞ¡Öµ¶ÔÓ¦µÄĞÇ×ùµãĞòºÅµÄ¶ş½øÖÆ±íÊ¾¼´Îª½âµ÷½á¹û
+    [tmp, index] = min(abs(s64(:,ones(1,L))-demod_in(ones(64,1),:)));% æœ€å°å€¼å¯¹åº”çš„æ˜Ÿåº§ç‚¹åºå·çš„äºŒè¿›åˆ¶è¡¨ç¤ºå³ä¸ºè§£è°ƒç»“æœ
     demod_out = c64(index,:);
     demod_out = reshape(transpose(demod_out),1,6*L);
 otherwise

@@ -5,39 +5,39 @@ clear
 clc
 tic
 %%% ---------- simulation parameter ---------------------------
-modLevel=4;% µ÷ÖÆ½×Êı
-num_bit=100;      %% bitÊı
+modLevel=4;% è°ƒåˆ¶é˜¶æ•°
+num_bit=100;      %% bitæ•°
 
 SNR_Arr= [0:2:10];
 numSNR=length(SNR_Arr);
 numFrame_Arr= ones(1,numSNR)*1500;
-TsigPower=1;% ĞÅºÅ¹¦ÂÊÎª1
+TsigPower=1;% ä¿¡å·åŠŸç‡ä¸º1
 
 for ns=1:numSNR
     %% -------------------------------------
     SNR=SNR_Arr(ns);
     numFrame=numFrame_Arr(ns);   
     
-    SNR_linear=10^(SNR/10);% dBÖµ»»ÎªÏßĞÔÖµ
-    NoisePower = TsigPower/SNR_linear;%¼ÆËãÔëÉù¹¦ÂÊ
+    SNR_linear=10^(SNR/10);% dBå€¼æ¢ä¸ºçº¿æ€§å€¼
+    NoisePower = TsigPower/SNR_linear;%è®¡ç®—å™ªå£°åŠŸç‡
     NoiseAmp=sqrt(NoisePower/2);%
       
     %%-------initialization----------
     num_total_error=0;
     
     for nf=1:numFrame
-        %% ----------------·¢ËÍ¶Ë--------------------
-        %---------Ëæ»ú²úÉúÊı¾İ---------------------------
+        %% ----------------å‘é€ç«¯--------------------
+        %---------éšæœºäº§ç”Ÿæ•°æ®---------------------------
         seriBit =randi([0 1],1,num_bit);
         
-        %%-------- QPSK µ÷ÖÆ -----------------------------
+        %%-------- QPSK è°ƒåˆ¶ -----------------------------
         DataModed=modulation(seriBit,modLevel);       
         
-        %% ******************** ĞÅµÀ *********************************************      
+        %% ******************** ä¿¡é“ *********************************************      
         % -----add gaussian noise-----------------
         Rdata=add_noise(DataModed,NoiseAmp);
         
-        %% ******************** ½ÓÊÕ¶Ë *********************************************     
+        %% ******************** æ¥æ”¶ç«¯ *********************************************     
         % ------------QPSK demodulation---------------------
         BitDemoded=demodulation(Rdata,modLevel);
         

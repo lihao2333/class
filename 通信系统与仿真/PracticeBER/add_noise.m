@@ -1,10 +1,10 @@
 function outdata=add_noise(indata,attn)
 %% function discription:add gauss noise
 %% input parameters
-%%      indata:ÊäÈë·ûºÅ
-%%      attn£ºÔëÉù±ê×¼²î
+%%      indata:è¾“å…¥ç¬¦å·
+%%      attnï¼šå™ªå£°æ ‡å‡†å·®
 %% output parameters
-%%      outdata£º¼ÓÔëÉùÖ®ºóµÄ·ûºÅ
+%%      outdataï¼šåŠ å™ªå£°ä¹‹åçš„ç¬¦å·
 
 [r,c]=size(indata);
 item=randn(r,c).*attn;
