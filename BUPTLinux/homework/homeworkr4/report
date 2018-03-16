@@ -1,0 +1,35 @@
+姓名：李昊
+学号：2014210192
+班级：2015211107
+//add.h
+int add(int a, int b);
+----------------------------------------
+//add.c
+#include"add.h"
+int add(int a, int b){
+return a+b;
+}
+----------------------------------------
+//main.c
+#include"add.h"
+#include<stdio.h>
+void main(){
+	int result;
+	result = add(100,100);
+	printf("result is %d \n",result);
+}
+----------------------------------------
+#Makefile
+cc = gcc
+ar = ar
+calc:calc.c libadd.a
+	$(cc) -o calc calc.c -L. -ladd
+add.o:add.c add.h
+	$(cc) -c add.c 
+libadd.a:add.o
+	$(ar) rcs libadd.a add.o
+clean:
+	rm -rf libadd.a add.o calc
+----------------------------------------
+//output:
+result is 200
