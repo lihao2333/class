@@ -10,7 +10,7 @@ int add(int a, int b){
 return a+b;
 }
 ----------------------------------------
-//main.c
+//calc.c
 #include"add.h"
 #include<stdio.h>
 void main(){

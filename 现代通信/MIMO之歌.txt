@@ -1,0 +1,120 @@
+MIMO岻梧
+
+
+　　U-E, when your channel looks fine,
+
+　　I said, U-E, give the network a sign,
+
+　　Which means, U-E,give a high C-Q-I,
+
+　　To report what you have measured.
+
+　　U-E, there is data for you,
+
+　　And two codewords,
+
+　　I think they may come through,
+
+　　So let¨s put them onto different ports
+
+　　And use spatial multiplexing.
+
+　　In other words it is M-I-M-O.
+
+　　In other words it is M-I-M-O.
+
+　　You don¨t need M-L-D,
+
+　　There are plenty of ways,
+
+　　Manufacturers have a choice ...
+
+　　M-I-M-O.
+
+　　In other words it is M-I-M-O.
+
+　　Two antennas you need,
+
+　　Four by four is agreed,
+
+　　And your throughput can be so high!
+
+　　U-E, can you see the Node-B?
+
+　　Come on, U-E,should it do T-x-D?
+
+　　Alamouti is a simple approach.
+
+　　But you¨ve got to know this one thing!
+
+　　Node-B is not serving just you.
+
+　　I said, Node-B,has a whole cell to do,
+
+　　And at cell-edge there¨s no M-I-M-O
+
+　　¨Cause the S-I-N-R is low.
+
+　　You cannot always do M-I-M-O.
+
+　　You cannot always do M-I-M-O.
+
+　　Two R-x ports you have
+
+　　So you still can combine,
+
+　　And the coverage should be fine ...
+
+　　M-I-M-O.
+
+　　It¨s good for you to use M-I-M-O.
+
+　　Two antennas you need,
+
+　　Four by four is agreed,
+
+　　And your throughput can be so high!
+
+　　U-E, if you want to transmit,
+
+　　I say, U-E, MI-MO isn¨t legit,
+
+　　You will have towait for L-T-E- A,
+
+　　Where RAN-1 will make it okay.
+
+　　That¨s where the decisions are made,
+
+　　And where many MI-MO sessions run late,
+
+　　So that Dirk says: ｀Juho will you take care
+
+　　Of this bunch of loopy people?¨.
+
+　　It¨s fun to standardize M-I-M-O.
+
+　　It¨s fun to specify M-I-M-O.
+
+　　You don¨t need M-L-D
+
+　　There are plenty of ways,
+
+　　Manufacturers have a choice ...
+
+　　M-I-M-O.
+
+　　It¨s fun to specify M-I-M-O.
+
+　　When your channel looks fine,
+
+　　Give the network a sign.
+
+　　M-I-M-O.
+
+　　Then just go and do M-I-M-O.
+
+　　Can you see the Node-B?
+
+　　Should it do T-x-D?
+
+　　M-I-M-O

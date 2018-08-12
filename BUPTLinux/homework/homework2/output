@@ -1,0 +1,47 @@
+Second linux homework
+class:2015211107 id:2014210192
+name:李昊
+==========source_code==========     
+#!/bin/bash  
+OUTPUT=output
+cal(){
+	return $(expr $1 \* $2)
+}
+show(){
+  	if [ $# == 0 ]
+	then
+	 	 printf "\n" >> $OUTPUT
+	else
+		printf $@ >> $OUTPUT
+	fi
+}
+printf "%s\nclass:%d id:%d\nname:李昊\n" "Second linux homework" "2015211107" "2014210192">$OUTPUT
+show "%-36s\n" "==========source_code=========="
+cat $0>>$OUTPUT
+show "%-36s\n" "==========output===================="
+for i in $(seq 1 9)  
+do   
+		for j in $(seq 1 9)
+		do
+				if [ $i != 5 ]; then 
+						cal $i $j
+						show "%4d" "$?" 
+				else 
+				  		show "%4s" "!_!"
+				fi
+		done
+		show
+done  
+
+show "%-27s\n" "===========end_of_file=============="
+==========output====================
+   1   2   3   4   5   6   7   8   9
+   2   4   6   8  10  12  14  16  18
+   3   6   9  12  15  18  21  24  27
+   4   8  12  16  20  24  28  32  36
+ !_! !_! !_! !_! !_! !_! !_! !_! !_!
+   6  12  18  24  30  36  42  48  54
+   7  14  21  28  35  42  49  56  63
+   8  16  24  32  40  48  56  64  72
+   9  18  27  36  45  54  63  72  81
+===========end_of_file==============
